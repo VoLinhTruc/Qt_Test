@@ -1,0 +1,2 @@
+This test purpose is creating queue with lock mechanism to use in multithread
+Because the QQueue is not thread-safe
