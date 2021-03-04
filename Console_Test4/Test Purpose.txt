@@ -1,0 +1,1 @@
+Create a Custom Type and overide the << operator to print the Custom Type out

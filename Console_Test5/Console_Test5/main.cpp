@@ -1,12 +1,10 @@
 #include <QCoreApplication>
 #include <QDebug>
-#include <QVariant>
-#include <QDebug>
 
-#include "mutex_queue.h"
+#include "message_data.h"
+
 
 // ------------------------------------------------------------------------------------------------
-
 class Custom_Class
 {
 public:
@@ -83,13 +81,14 @@ QDebug operator<<(QDebug dbg, const Custom_Class &obj)
 
 int main(int argc, char *argv[])
 {
-    Mutex_Queue<QVariant> queue;
+    Message_Data md1("start", 69);
+    Message_Data md2("run", QVariant::fromValue(Custom_Class(6, 9, 6)));
+    Message_Data md3("stop", "end");
 
-    queue.enqueue(69);
-    queue.enqueue(QVariant::fromValue(Custom_Class(3, 5, 7)));  // enqueue the Custom_Class to queue
-    queue.enqueue("96");
+    qDebug() << md1.mess() << md2.mess() << md3.mess() << Qt::endl;
+    qDebug() << md1.data() << md2.data().value<Custom_Class>() << md3.data().value<QString>() << Qt::endl;
 
-    qDebug().nospace() << queue.dequeue().value<QString>() << queue.dequeue().value<Custom_Class>() << queue.dequeue().value<int>() << Qt::endl; // dequeue the Custom_Class from queue
+    Custom_Class &obj = nullptr;
 
     return 1;
 }

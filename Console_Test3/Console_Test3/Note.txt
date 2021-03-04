@@ -1,0 +1,3 @@
+The class with the template cause an "undefine reference to" error if using both *.h and *.cpp file for the class.
+So put all method definition in the *.h file can slove the error.
+That why this project use only the *.h file.

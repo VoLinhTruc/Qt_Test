@@ -1,11 +1,6 @@
 #include <QCoreApplication>
 #include <QDebug>
-#include <QVariant>
-#include <QDebug>
 
-#include "mutex_queue.h"
-
-// ------------------------------------------------------------------------------------------------
 
 class Custom_Class
 {
@@ -75,21 +70,17 @@ void Custom_Class::z(int z)
 QDebug operator<<(QDebug dbg, const Custom_Class &obj)
 {
     dbg.nospace() << "{" << "x=" << obj._x << ", " << "y=" << obj._y << ", " << "z=" << obj._z << "}";
-    return dbg.maybeSpace();
+    return dbg.nospace();
 }
 
-// ------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------------------------------
 
 
 int main(int argc, char *argv[])
 {
-    Mutex_Queue<QVariant> queue;
+    Custom_Class abc(1, 3, 5);
 
-    queue.enqueue(69);
-    queue.enqueue(QVariant::fromValue(Custom_Class(3, 5, 7)));  // enqueue the Custom_Class to queue
-    queue.enqueue("96");
-
-    qDebug().nospace() << queue.dequeue().value<QString>() << queue.dequeue().value<Custom_Class>() << queue.dequeue().value<int>() << Qt::endl; // dequeue the Custom_Class from queue
+    qDebug().nospace() << "Test" << abc << endl << Custom_Class(6, 9, 6);
 
     return 1;
 }

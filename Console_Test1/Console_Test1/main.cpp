@@ -1,85 +1,19 @@
 #include <QCoreApplication>
 #include <QDebug>
 #include <QVariant>
-#include <iostream>
-
-using namespace std;
-
-class My_Class
-{
-public:
-    My_Class() = default;
-    ~My_Class() = default;
-    My_Class(const My_Class &) = default;
-    My_Class &operator=(const My_Class &) = default;
-
-    My_Class(int x, int y, int z);
-
-    int x();
-    void x(int x);
-    int y();
-    void y(int y);
-    int z();
-    void z(int z);
-
-private:
-    int _x;
-    int _y;
-    int _z;
-};
-Q_DECLARE_METATYPE(My_Class)
-
-My_Class::My_Class(int x, int y, int z)
-{
-    _x = x;
-    _y = y;
-    _z = z;
-}
-
-int My_Class::x()
-{
-    return _x;
-}
-
-void My_Class::x(int x)
-{
-    _x = x;
-}
-
-int My_Class::y()
-{
-    return _y;
-}
-
-void My_Class::y(int y)
-{
-    _y = y;
-}
-
-int My_Class::z()
-{
-    return _z;
-}
-
-void My_Class::z(int z)
-{
-    _z = z;
-}
-
+#include "custom_class.h"
 
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    Custom_Class cus_obj(1, 2, 3);
+    qDebug() << cus_obj.x() << " " << cus_obj.y() << " " << cus_obj.z() << " " << Qt::endl;
 
-    My_Class my_class(1, 2, 3);
-    qDebug() << my_class.x() << " " << my_class.y() << " " << my_class.z() << " " << Qt::endl;
+    QVariant my_var = QVariant::fromValue(cus_obj);
 
-    QVariant my_var = QVariant::fromValue(my_class);
+    Custom_Class cus_obj_from_var = my_var.value<Custom_Class>();
 
-    My_Class my_class_from_variant = my_var.value<My_Class>();
+    qDebug() << cus_obj_from_var.z() << " " << cus_obj_from_var.y() << " " << cus_obj_from_var.x() << " " << Qt::endl;
 
-    qDebug() << my_class_from_variant.x() << " " << my_class_from_variant.y() << " " << my_class_from_variant.z() << " " << Qt::endl;
-
-//    return a.exec();
+    return 1;
 }
