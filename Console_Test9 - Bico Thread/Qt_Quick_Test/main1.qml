@@ -10,19 +10,19 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
-    onClosing:
-    {
-        console.log("YYY");
-//        thread_ptr.terminate();
-    }
-
 
     Button {
         objectName: "button"
         id: button
         x: 270
         y: 220
-        text: qsTr("Button")
+        text: qsTr("main1")
     }
 
 }
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+##^##*/

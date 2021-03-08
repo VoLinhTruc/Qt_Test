@@ -8,11 +8,11 @@ CONFIG += c++11
 
 SOURCES += \
         bico_qbackendthread.cpp \
+        bico_qbackendthread_example.cpp \
         bico_qmessdata.cpp \
         bico_qthread.cpp \
         bico_quithread.cpp \
-        core_thread_1.cpp \
-        core_thread_2.cpp \
+        bico_quithread_example.cpp \
         main.cpp
 
 RESOURCES += qml.qrc
@@ -30,9 +30,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     bico_qbackendthread.h \
+    bico_qbackendthread_example.h \
     bico_qmessdata.h \
     bico_qmutexqueue.h \
     bico_qthread.h \
     bico_quithread.h \
-    core_thread_1.h \
-    core_thread_2.h
+    bico_quithread_example.h

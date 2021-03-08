@@ -10,11 +10,6 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
-    onClosing:
-    {
-        console.log("XXX");
-//        thread_ptr.terminate();
-    }
 
 
     Button {
@@ -22,7 +17,19 @@ Window {
         id: button
         x: 270
         y: 220
-        text: qsTr("Button")
+        text: qsTr("main")
+
+        onClicked: thread.te
     }
 
+    ComboBox {
+        id: comboBox
+        x: 230
+        y: 304
+    }
+
+    Connections {
+        target: window
+        onClosing: console.log("clicked")
+    }
 }
