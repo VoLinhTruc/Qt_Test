@@ -30,8 +30,8 @@ int main(int argc, char *argv[])
     ui_thread1.setObjectName("UI Thread 1");
     ui_thread2.setObjectName("UI Thread 2");
 
-    ui_thread1.start();
     ui_thread2.start();
+    ui_thread1.start();
 
     return app.exec();
 }

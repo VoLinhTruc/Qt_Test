@@ -2,52 +2,46 @@
 
 void Bico_QUIThread_Example::run()
 {
-    while (1)
+    do
     {
-        if (_qin != nullptr)
+        Bico_QMessData input;
+        if (qinDequeue(input))
         {
-//            if (!_qin->isEmpty())
-//            {
-//                Bico_QMessData mess_data = _qin->dequeue();
-//                QString mess = mess_data.mess();
-//                QVariant data = mess_data.data();
+            QString mess = input.mess();
+            QVariant data = input.data();
 
-//                if (mess == QString("1"))
-//                {
-//                    qDebug() << mess << data.value<int>();
-//                }
-//                else if (mess == QString("2"))
-//                {
-//                    qDebug() << mess << data.value<QString>();
-//                }
-//                else
-//                {
+            if (mess == QString("1"))
+            {
+                qDebug() << QThread::objectName() << mess << data.value<int>();
+            }
+            else if (mess == QString("2"))
+            {
+                qDebug() << QThread::objectName() << mess << data.value<QString>();
+                if(getRootFirstObj()->findChild<QObject*>("qmess") != nullptr)
+                {
+                    qDebug() << getRootFirstObj()->findChild<QObject*>("qmess")->setProperty("text", data);
+                }
+            }
+            else
+            {
 
-//                }
-//            }
-        }
-
-
-        if (_qout != nullptr)
-        {
-//            static int i = 0;
-//            i++;
-
-//            Bico_QMessData mess_data;
-//            mess_data.mess(QString("1"));
-//            mess_data.data(QVariant(i));
-
-//            _qout->enqueue(mess_data);
-
-//            sleep(1);
+            }
         }
 
         qDebug() << QString("Hello from ") + QThread::objectName();
         sleep(1);
-    }
+    } while (1);
+
+    qDebug() << objectName() << "END";
 }
 
-void Bico_QUIThread_Example::test()
+
+
+void Bico_QUIThread_Example::test(QString mess, QString data)
 {
-    qDebug() << "Clicked";
+    Bico_QMessData mess_data;
+    mess_data.mess(mess);
+    mess_data.data(QVariant(data));
+
+    qoutEnqueue(mess_data);
 }

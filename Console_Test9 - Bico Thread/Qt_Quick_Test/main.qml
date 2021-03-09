@@ -10,26 +10,41 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
+    Connections {
+        target: window
+//        onClosing: thread.terminateThread() // old syntax
+        function onClosing ()
+        {
+            thread.terminateThread()
+        }
+    }
 
 
     Button {
         objectName: "button"
         id: button
-        x: 270
-        y: 220
+        x: 423
+        y: 287
         text: qsTr("main")
 
-        onClicked: thread.test();
+        onClicked: thread.test(qmess.text, qdata.text)
     }
 
-    ComboBox {
-        id: comboBox
-        x: 230
-        y: 304
+    TextField {
+        id: qmess
+        x: 205
+        y: 149
+        width: 318
+        height: 40
+        placeholderText: qsTr("Text Field")
     }
 
-    Connections {
-        target: window
-        onClosing: console.log("clicked")
+    TextField {
+        id: qdata
+        x: 205
+        y: 214
+        width: 318
+        height: 40
+        placeholderText: qsTr("Text Field")
     }
 }

@@ -1,0 +1,10 @@
+debug/bico_qbackendthread.o
+debug/bico_qbackendthread_example.o
+debug/bico_qmessdata.o
+debug/bico_qthread.o
+debug/bico_quithread.o
+debug/bico_quithread_example.o
+debug/main.o
+debug/qrc_qml.o
+debug/moc_bico_quithread.o
+debug/moc_bico_quithread_example.o

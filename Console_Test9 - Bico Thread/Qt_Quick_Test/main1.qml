@@ -10,19 +10,37 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
+    Connections {
+        target: window
+//        onClosing: thread.terminateThread() // old syntax
+        function onClosing ()
+        {
+            thread.terminateThread()
+        }
+    }
+
 
     Button {
         objectName: "button"
         id: button
         x: 270
-        y: 220
+        y: 333
         text: qsTr("main1")
+    }
+
+    TextField {
+        objectName: "qmess"
+        id: qmess
+        x: 220
+        y: 220
+        placeholderText: qsTr("Text Field")
+
+        function readValues(val)
+        {
+            text = val;
+        }
     }
 
 }
 
-/*##^##
-Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
-##^##*/
+

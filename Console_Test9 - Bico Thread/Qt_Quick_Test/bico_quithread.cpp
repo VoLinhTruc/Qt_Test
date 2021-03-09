@@ -5,6 +5,7 @@ Bico_QUIThread::Bico_QUIThread(Bico_QMutexQueue<Bico_QMessData> *qin, Bico_QMute
     _qin = qin;
     _qout = qout;
     _ui_path = ui_path;
+//    _thread_stop_flag = 0;
 }
 
 Bico_QUIThread::~Bico_QUIThread()
@@ -22,4 +23,15 @@ void Bico_QUIThread::start(QThread::Priority priority)
         context->setContextProperty("thread", this);
     }
     QThread::start(priority);
+}
+
+void Bico_QUIThread::terminateThread()
+{
+    qDebug() << objectName() << "END";
+    terminate();
+}
+
+QObject *Bico_QUIThread::getRootFirstObj()
+{
+    return _engine.rootObjects().at(0);
 }

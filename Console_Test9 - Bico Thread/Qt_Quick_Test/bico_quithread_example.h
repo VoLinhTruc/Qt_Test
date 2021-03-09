@@ -15,7 +15,7 @@ public:
 
     virtual void run();
 
-    Q_INVOKABLE void test();
+    Q_INVOKABLE void test(QString mess, QString data);
 
 };
 

@@ -1,0 +1,10 @@
+release/bico_qbackendthread.o
+release/bico_qbackendthread_example.o
+release/bico_qmessdata.o
+release/bico_qthread.o
+release/bico_quithread.o
+release/bico_quithread_example.o
+release/main.o
+release/qrc_qml.o
+release/moc_bico_quithread.o
+release/moc_bico_quithread_example.o
