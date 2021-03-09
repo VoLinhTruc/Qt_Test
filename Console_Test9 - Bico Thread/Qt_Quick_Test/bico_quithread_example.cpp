@@ -47,9 +47,7 @@ void Bico_QUIThread_Example::run()
     }
 }
 
-}
-
 void Bico_QUIThread_Example::test()
 {
-    qDebug() << objectName();
+    qDebug() << "Clicked";
 }
