@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 //    thread1.start();
 //    thread2.start();
 
-    Bico_QUIThread_Example ui_thread1(nullptr, new Bico_QMutexQueue<Bico_QMessData>, "qrc:/main.qml");
+    Bico_QUIThread_Example ui_thread1(new Bico_QMutexQueue<Bico_QMessData>, new Bico_QMutexQueue<Bico_QMessData>, "qrc:/main.qml");
     Bico_QUIThread_Example ui_thread2(ui_thread1.qout(), nullptr, "qrc:/main1.qml");
 
     ui_thread1.setObjectName("UI Thread 1");

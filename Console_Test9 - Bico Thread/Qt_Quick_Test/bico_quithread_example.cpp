@@ -10,6 +10,23 @@ void Bico_QUIThread_Example::run()
             QString mess = input.mess();
             QVariant data = input.data();
 
+            if (mess == QString("mess_from_ui"))
+            {
+                QJsonDocument json_doc = QJsonDocument::fromJson(data.value<QString>().toUtf8());
+                QJsonObject json_obj  = json_doc.object();
+
+                Bico_QMessData output;
+                if(json_obj.contains("mess"))
+                {
+                    output.mess(json_obj["mess"].toString());
+                }
+                if(json_obj.contains("data"))
+                {
+                    output.data(QVariant(json_obj["data"].toString()));
+                }
+
+                qoutEnqueue(output);
+            }
             if (mess == QString("1"))
             {
                 qDebug() << QThread::objectName() << mess << data.value<int>();
@@ -17,10 +34,7 @@ void Bico_QUIThread_Example::run()
             else if (mess == QString("2"))
             {
                 qDebug() << QThread::objectName() << mess << data.value<QString>();
-                if(getRootFirstObj()->findChild<QObject*>("qmess") != nullptr)
-                {
-                    qDebug() << getRootFirstObj()->findChild<QObject*>("qmess")->setProperty("text", data);
-                }
+                emit notifyToUI(data.value<QString>());
             }
             else
             {
@@ -29,19 +43,9 @@ void Bico_QUIThread_Example::run()
         }
 
         qDebug() << QString("Hello from ") + QThread::objectName();
-        sleep(1);
+        msleep(100);
     } while (1);
 
     qDebug() << objectName() << "END";
 }
 
-
-
-void Bico_QUIThread_Example::test(QString mess, QString data)
-{
-    Bico_QMessData mess_data;
-    mess_data.mess(mess);
-    mess_data.data(QVariant(data));
-
-    qoutEnqueue(mess_data);
-}

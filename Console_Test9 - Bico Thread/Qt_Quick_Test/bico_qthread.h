@@ -19,6 +19,7 @@ protected:
     Bico_QMutexQueue<Bico_QMessData> *_qin;
     Bico_QMutexQueue<Bico_QMessData> *_qout;
 
+    int qinEnqueue(Bico_QMessData &input);
     int qinDequeue(Bico_QMessData &output);
     int qoutEnqueue(Bico_QMessData &input);
 };

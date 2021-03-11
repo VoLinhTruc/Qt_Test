@@ -16,7 +16,12 @@ public:
 
     void start(QThread::Priority priority = InheritPriority);
 
+    Q_INVOKABLE void fromUI(QString mess, QString data);
     Q_INVOKABLE void terminateThread();
+
+
+signals:
+    void notifyToUI(QString value);
 
 protected:
     QString _ui_path;

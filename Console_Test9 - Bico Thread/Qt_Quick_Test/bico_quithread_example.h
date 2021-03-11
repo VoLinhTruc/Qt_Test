@@ -1,6 +1,8 @@
 #ifndef BICO_QUITHREAD_EXAMPLE_H
 #define BICO_QUITHREAD_EXAMPLE_H
 
+#include <QJsonDocument>
+#include <QJsonObject>
 #include "bico_quithread.h"
 
 
@@ -14,9 +16,6 @@ public:
     }
 
     virtual void run();
-
-    Q_INVOKABLE void test(QString mess, QString data);
-
 };
 
 #endif // BICO_QUITHREAD_EXAMPLE_H

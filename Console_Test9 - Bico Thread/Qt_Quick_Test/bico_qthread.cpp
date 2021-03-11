@@ -20,6 +20,18 @@ void Bico_QThread::setQout(Bico_QMutexQueue<Bico_QMessData> *qout)
     _qout = qout;
 }
 
+
+int Bico_QThread::qinEnqueue(Bico_QMessData &input)
+{
+    if (_qin != nullptr)
+    {
+        _qin->enqueue(input);
+        return 1;
+    }
+
+    return 0;
+}
+
 int Bico_QThread::qinDequeue(Bico_QMessData &output)
 {
     if (_qin != nullptr)

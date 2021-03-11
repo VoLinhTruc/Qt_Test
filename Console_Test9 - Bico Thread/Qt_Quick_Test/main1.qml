@@ -10,14 +10,25 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
-    Connections {
-        target: window
-//        onClosing: thread.terminateThread() // old syntax
-        function onClosing ()
+    // This block of code will not be change - begin --------------------------------------------
+        signal notifyFromBackend(string value)
+        onNotifyFromBackend:
         {
-            thread.terminateThread()
+            // This block of code is allowed to be changed - begin -------------------
+            qmess1.text = value
+            // This block of code is allowed to be changed - end -------------------
         }
-    }
+
+
+        Connections {
+            target: window
+    //        onClosing: thread.terminateThread() // old syntax
+            function onClosing ()
+            {
+                thread.terminateThread()
+            }
+        }
+    // This block of code will not be change - end --------------------------------------------
 
 
     Button {
@@ -26,19 +37,33 @@ Window {
         x: 270
         y: 333
         text: qsTr("main1")
+
+        Connections {
+            target: button
+            onClicked: qmess1.text = qmess.text
+        }
+
     }
 
     TextField {
         objectName: "qmess"
         id: qmess
-        x: 220
-        y: 220
+        x: 57
+        y: 113
         placeholderText: qsTr("Text Field")
 
         function readValues(val)
         {
             text = val;
         }
+    }
+
+    TextField {
+        id: qmess1
+        x: 385
+        y: 194
+        objectName: "qmess"
+        placeholderText: qsTr("Text Field")
     }
 
 }

@@ -10,14 +10,25 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
-    Connections {
-        target: window
-//        onClosing: thread.terminateThread() // old syntax
-        function onClosing ()
+    // This block of code will not be change - begin --------------------------------------------
+        signal notifyFromBackend(string value)
+        onNotifyFromBackend:
         {
-            thread.terminateThread()
+            // This block of code is allowed to be changed - begin -------------------
+            console.log(value)
+            // This block of code is allowed to be changed - end -------------------
         }
-    }
+
+
+        Connections {
+            target: window
+    //        onClosing: thread.terminateThread() // old syntax
+            function onClosing ()
+            {
+                thread.terminateThread()
+            }
+        }
+    // This block of code will not be change - end --------------------------------------------
 
 
     Button {
@@ -27,7 +38,7 @@ Window {
         y: 287
         text: qsTr("main")
 
-        onClicked: thread.test(qmess.text, qdata.text)
+        onClicked: thread.fromUI(qmess.text, qdata.text)
     }
 
     TextField {
